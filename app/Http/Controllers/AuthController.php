@@ -19,6 +19,7 @@ class AuthController extends Controller
         if(isset($_GET['code']) ){
           session(['code' => $_GET['code']]);
           $this->getUserCodes();
+          return redirect('/toptracks');
         } 
         else if(Session::has('accessToken') ){
             return redirect('/toptracks');

@@ -1,0 +1,13 @@
+
+body {
+    background-color: black;
+}
+
+.mouseOver:hover {
+    transition: .3s ease;
+    opacity: 0.5;
+}
+
+.card {
+    border: none !important; 
+}

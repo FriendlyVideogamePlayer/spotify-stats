@@ -6,7 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/top">Top</a>
+        <a class="nav-link" href="http://localhost/spotifystats/public/toptracks">Top Tracks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost/spotifystats/public/topartists">Top Artists</a>
       </li>
     </ul>
   </div>

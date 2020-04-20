@@ -18,7 +18,12 @@ Route::get('/', 'AuthController@login');
 
 Route::get('/callback', 'AuthController@callback');
 
-Route::get('/toptracks', 'DataController@topTracks');
+Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)');
+
+/*
+Route::get('/toptracks', 'DataController@getTop');
+
+Route::get('/topartists', 'DataController@getTop');
 
 Route::get('/callbak', function () {
     return view('top');
