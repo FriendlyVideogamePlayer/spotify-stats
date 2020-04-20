@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/', 'AuthController@login');
+
+Route::get('/callback', 'AuthController@callback');
+
+Route::get('/toptracks', 'DataController@topTracks');
+
+Route::get('/callbak', function () {
+    return view('top');
 });
+
