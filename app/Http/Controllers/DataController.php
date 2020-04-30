@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Http;
 class DataController extends Controller
 {
     function getTop($type) {
-        $range = "short_term";
+
+        if(isset($_GET['t'])) {
+			$range = $_GET['t'];
+        } else {
+            $range = "short_term";
+        }
+        
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
@@ -17,7 +23,7 @@ class DataController extends Controller
         
         $data = $response->json();
 
-        return view('top')->with(['items' => $data['items'], 'type' => $type]);
+        return view('top')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
         echo "<pre>";
         print_r($data);
     }
