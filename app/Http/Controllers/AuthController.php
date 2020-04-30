@@ -29,6 +29,7 @@ class AuthController extends Controller
         }
       }
   
+      // Gets a user's accessToken which is needed in future API calls and a refreshToken which is needed to update the acessToken
       function getUserCodes() {
 
         $authorization = base64_encode("".env('SPOTIFY_CLIENT_ID').":".env('SPOTIFY_CLIENT_SECRET'));
