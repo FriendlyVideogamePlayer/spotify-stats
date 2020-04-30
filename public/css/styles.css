@@ -1,6 +1,6 @@
 
 body {
-    background-color: black;
+    background-color: #121212;
 }
 
 .mouseOver:hover {
@@ -10,4 +10,26 @@ body {
 
 .card {
     border: none !important; 
+}
+
+.itemName {
+    opacity: 0;
+}
+
+.itemName:hover {
+    opacity: 1;
+}
+
+.nav-link, .navbar-brand {
+    color: white;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: purple;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    font-size: 60px;
 }

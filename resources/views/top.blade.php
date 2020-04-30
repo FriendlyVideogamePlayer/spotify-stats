@@ -5,6 +5,22 @@
 
 <div class="container-fluid">
 
+    <div class="header">
+        Your top {{$type}} 
+    </div>
+
+    <ul class="nav justify-content-end mb-3">
+    <li class="nav-item">
+        <a class="nav-link" href="#">4 Weeks</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">6 Months</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">All time</a>
+    </li>
+    </ul>
+
     <div class="card-deck">
         @foreach($items as $item)
             <a href="{{$item['external_urls']['spotify']}}" class="card mb-4 mouseOver" style="min-width: 18rem;">
