@@ -56,7 +56,7 @@ class DataController extends Controller
             session(['recommendedSeeds' => implode('%2C', $recommendedSeeds)]);
         }
 
-        return view('top')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
+        return view('dataDisplay')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
     }
 
     // Gets a user reccommended tracks based upon their top artists
@@ -68,7 +68,7 @@ class DataController extends Controller
         
         $data = $response->json();
 
-        return view('top')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
+        return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
     }
 
 }

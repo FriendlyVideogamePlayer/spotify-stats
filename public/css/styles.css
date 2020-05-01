@@ -12,12 +12,21 @@ body {
     border: none !important; 
 }
 
-.itemName {
+.overlay {
     opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.itemName:hover {
+.overlay:hover {
     opacity: 1;
+}
+
+.itemName {
+    color: white;
+    text-align: center;
+    font-size: 30px;
 }
 
 .nav-link, .navbar-brand {
