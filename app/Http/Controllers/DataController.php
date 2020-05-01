@@ -41,19 +41,34 @@ class DataController extends Controller
                 return $this->getTop($type);
             }
         }
+        
+        // If on artists then get artist seeds for reccomended tracks
+        if($type == 'artists') {
+            $recommendedSeeds = [];
+            $i = 0;
+
+            while($i < 5) {
+                $artistId = $data['items'][$i]['id'];
+                array_push($recommendedSeeds, $artistId);
+                $i++;
+            }
+
+            session(['recommendedSeeds' => implode('%2C', $recommendedSeeds)]);
+        }
+
         return view('top')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
     }
 
     // Gets a user reccommended tracks based upon their top artists
-    function getReccommendations() {
+    function getRecommendations() {
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
-        ])->get('https://api.spotify.com/v1/me/top/'.$type.'?time_range='.$range.'&limit=50');
+        ])->get('https://api.spotify.com/v1/recommendations?limit=50&seed_artists='.session('recommendedSeeds'));
         
         $data = $response->json();
 
-        return view('top')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
+        return view('top')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
     }
 
 }

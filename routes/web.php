@@ -20,6 +20,8 @@ Route::get('/callback', 'AuthController@callback');
 
 Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)');
 
+Route::get('/recommendations', 'DataController@getRecommendations');
+
 /*
 Route::get('/toptracks', 'DataController@getTop');
 

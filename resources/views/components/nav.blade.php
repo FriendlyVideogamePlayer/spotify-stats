@@ -12,7 +12,7 @@
         <a class="nav-link" href="http://localhost/spotifystats/public/topartists">Top Artists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/spotifystats/public/reccommendations">Reccommendations</a>
+        <a class="nav-link" href="http://localhost/spotifystats/public/recommendations">Reccommendations</a>
       </li>
     </ul>
   </div>
