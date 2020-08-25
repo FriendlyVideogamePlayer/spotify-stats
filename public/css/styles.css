@@ -39,13 +39,16 @@ body {
     color: rgba(255, 255, 255, 0.999);
 }
 
+.index {
+    text-align: center;
+}
 
 .nav-link, .navbar-brand {
     color: white;
 }
 
 .nav-link:hover, .navbar-brand:hover {
-    color: purple;
+    color: #6f42c1;
 }
 
 .header {
@@ -55,10 +58,14 @@ body {
 }
 
 .selectedNav {
-    color:purple;
-    text-decoration: underline;
+    color:#6f42c1;
 }
 
+.userImage {
+    width:50px;
+    height: 50px;
+
+}
 
 .artistImage {
     max-height: 320px ;
@@ -151,7 +158,7 @@ body {
     }
 }
 /* Two items (from 1) */
-@media (max-width: 443px) {
+@media (max-width: 456px) {
     .cardAdjust {
         min-width: 140px; 
         max-width: 140px;

@@ -1,19 +1,31 @@
-<nav class="navbar navbar-expand-lg  mb-3">
-  <a class="navbar-brand" href="#">Spotify stats</a>
+<nav class="navbar navbar-expand-md  mb-3">
+  <a class="navbar-brand" >Spotify stats</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/spotifystats/public/toptracks">Top Tracks</a>
+        <a class="nav-link {{ Request::is('toptracks') ? 'selectedNav' : '' }}" href="http://localhost/spotifystats/public/toptracks">Top Tracks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/spotifystats/public/topartists">Top Artists</a>
+        <a class="nav-link {{ Request::is('topartists') ? 'selectedNav' : '' }}" href="http://localhost/spotifystats/public/topartists">Top Artists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/spotifystats/public/recommendations">Reccommendations</a>
+        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="http://localhost/spotifystats/public/recommendations">Reccommendations</a>
       </li>
     </ul>
+  </div>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarRight">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <p class=nav-link><?php echo session('username'); ?></p>
+    </li>
+    <li class="nav-item">
+      <img class="userImage" src="<?php echo session('userImage') ?>" alt="userImage">
+    </li>
+  </ul>
+</div>
+
   </div>
 </nav>

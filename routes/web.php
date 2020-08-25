@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'AuthController@login');
+Route::get('/authorize', 'AuthController@login');
+
+Route::get('/', function () {
+    return view('index');
+});
 
 Route::get('/callback', 'AuthController@callback');
 

@@ -26,6 +26,12 @@ class DataController extends Controller
 
     // Gets a users top 50 tracks/artists depending on which route was used
     function getTop($type) {
+        if(!Session::has('accessToken')) {
+            return redirect('/');
+        }
+        if(!Session::has('username')) {
+            $this->getDisplayInfo();
+        }
 
         $range = isset($_GET['t']) ? $_GET['t'] : "short_term";
     
@@ -68,7 +74,31 @@ class DataController extends Controller
         
         $data = $response->json();
 
+        if(isset($data['error']['status'])) {
+            if($data['error']['status'] == '401') {
+                DataController::refreshDataAccess();
+                return $this->getRecommendations();
+            }
+        }
+
         return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
     }
 
+    // Gets a user's display name and image'
+    function getDisplayInfo() {
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.session('accessToken'),
+        ])->get('https://api.spotify.com/v1/me');
+        
+        $data = $response->json();
+
+        session(['username' => $data['display_name']]);
+
+        if(isset($data['images']['0']['url']) ) {
+            session(['userImage' => $data['images']['0']['url']]);
+        } else {
+            session(['userImage' => "Images/noArtist.jpg"]);
+        }
+    }
 }
