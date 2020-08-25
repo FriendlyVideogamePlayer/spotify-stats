@@ -11,16 +11,16 @@
 
     @include('components.range')
 
-    <div class="card-deck">
+    <div class="card-deck justify-content-center">
         @foreach($items as $item)
 
-            <a href="{{$item['external_urls']['spotify']}}" class="card mb-4 mouseOver" style="min-width: 18rem;">
+            <a href="{{$item['external_urls']['spotify']}}" class="card mb-4 cardAdjust" >
             @if($type == "artists")
-                <img class="card-img-top" src="{{$item['images']['1']['url']}}" alt="Card image cap" style="object-fit: cover;">
+                <img class="artistImage card-img-top" src="{{$item['images']['1']['url']}}" alt="Card image cap" style="object-fit: cover;">
             @else
-                <img class="card-img-top" src="{{$item['album']['images']['1']['url']}}" alt="Card image cap">
+                <img class="artistImage card-img-top" src="{{$item['album']['images']['1']['url']}}" alt="Card image cap">
             @endif
-                <div class="card-img-overlay overlay">
+                <div class="extend card-img-overlay overlay">
                     <div class="itemName"> {{$item['name']}} </div>
                 </div>
                 <div class="card-footer d-md-none">

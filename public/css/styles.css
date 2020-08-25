@@ -3,31 +3,42 @@ body {
     background-color: #121212;
 }
 
-.mouseOver:hover {
-    transition: .3s ease;
-    opacity: 0.5;
-}
-
 .card {
     border: none !important; 
 }
 
 .overlay {
-    opacity: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
 }
 
 .overlay:hover {
-    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .itemName {
-    color: white;
+    color: rgba(0, 0, 0, 0);
     text-align: center;
     font-size: 30px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: +1;
 }
+
+.itemName:hover {
+    color: rgba(255, 255, 255, 0.999);
+}
+
 
 .nav-link, .navbar-brand {
     color: white;
@@ -46,4 +57,127 @@ body {
 .selectedNav {
     color:purple;
     text-decoration: underline;
+}
+
+
+.artistImage {
+    max-height: 320px ;
+    max-width: 320px ;
+}
+
+
+.extend {
+    width: 100% !important;
+}
+
+.cardAdjust {
+    height: auto; 
+    min-width: 320px; 
+    max-width:320px;
+}
+
+/* Media queries to enable more items to show at lower resolutions*/
+
+/* Four items (from 3) */
+@media (max-width: 1456px) {
+    .cardAdjust {
+        min-width: 300px; 
+        max-width: 300px;
+    }
+
+    .artistImage {
+        max-height: 300px ;
+        max-width: 300px ;
+    }
+}
+/* Four items (from 3)*/
+@media (max-width: 1376px) {
+    .cardAdjust {
+        min-width: 280px; 
+        max-width: 280px;
+    }
+
+    .artistImage {
+        max-height: 280px ;
+        max-width: 280px ;
+    }
+}
+/* Four items (from 3) */
+@media (max-width: 1296px) {
+    .cardAdjust {
+        min-width: 260px; 
+        max-width: 260px;
+    }
+
+    .artistImage {
+        max-height: 260px ;
+        max-width: 260px ;
+    }
+}
+/* Four items (from 3) */
+@media (max-width: 1216px) {
+    .cardAdjust {
+        min-width: 240px; 
+        max-width: 240px;
+    }
+
+    .artistImage {
+        max-height: 240px ;
+        max-width: 240px ;
+    }
+}
+/* Three items (from 2) */
+@media (max-width: 856px) {
+    .cardAdjust {
+        min-width: 200px; 
+        max-width: 200px;
+    }
+
+    .artistImage {
+        max-height: 200px ;
+        max-width: 200px ;
+    }
+}
+/* Two items (from 1) */
+@media (max-width: 856px) {
+    .cardAdjust {
+        min-width: 180px; 
+        max-width: 180px;
+    }
+
+    .artistImage {
+        max-height: 180px ;
+        max-width: 180px ;
+    }
+}
+/* Two items (from 1) */
+@media (max-width: 443px) {
+    .cardAdjust {
+        min-width: 140px; 
+        max-width: 140px;
+    }
+
+    .artistImage {
+        max-height: 140px ;
+        max-width: 140px ;
+    }
+}
+
+@media (min-width: 330px) {
+    .card-deck .card {
+        margin-right: 20px !important;
+        margin-left: 20px !important;
+    }
+}
+
+
+@media (min-width: 330px) {
+    .card-deck {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
 }
