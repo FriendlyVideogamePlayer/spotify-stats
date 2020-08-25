@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class DataController extends Controller
 {
     // This refreshes the accessToken that is required to run any other API call
-    static function refreshDataAccess() {
+    function refreshDataAccess() {
         $authorization = base64_encode("".env('SPOTIFY_CLIENT_ID').":".env('SPOTIFY_CLIENT_SECRET'));
 
         $response = Http::asForm()->withHeaders([
@@ -42,8 +42,8 @@ class DataController extends Controller
         $data = $response->json();
 
         if(isset($data['error']['status'])) {
-            if($data['error']['status'] == '401') {
-                DataController::refreshDataAccess();
+            if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
+                $this->refreshDataAccess();
                 return $this->getTop($type);
             }
         }
@@ -73,10 +73,10 @@ class DataController extends Controller
         ])->get('https://api.spotify.com/v1/recommendations?limit=50&seed_artists='.session('recommendedSeeds'));
         
         $data = $response->json();
-
+            return $data;
         if(isset($data['error']['status'])) {
-            if($data['error']['status'] == '401') {
-                DataController::refreshDataAccess();
+            if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
+                $this->refreshDataAccess();
                 return $this->getRecommendations();
             }
         }

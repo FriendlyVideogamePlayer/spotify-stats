@@ -22,7 +22,7 @@
       <p class="plainItem nav-link"><?php echo session('username'); ?></p>
     </li>
     <li class="nav-item">
-      <img class="userImage" src="<?php echo session('userImage') ?>" alt="userImage">
+      <img class="userImage" src="{{ session('userImage') ?? asset('images/noimage.png') }}" alt="userImage">
     </li>
   </ul>
 </div>
