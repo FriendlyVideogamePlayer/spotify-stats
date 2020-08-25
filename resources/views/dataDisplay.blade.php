@@ -14,7 +14,7 @@
     <div class="card-deck justify-content-center">
         @foreach($items as $item)
 
-            <a href="{{$item['external_urls']['spotify']}}" class="card mb-4 cardAdjust" >
+            <a href="{{$item['external_urls']['spotify']}}" class="card mb-4 cardAdjust card-home" >
             @if($type == "artists")
                 <img class="artistImage card-img-top" src="{{$item['images']['1']['url']}}" alt="Card image cap" style="object-fit: cover;">
             @else

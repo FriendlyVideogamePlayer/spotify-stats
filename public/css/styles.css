@@ -69,6 +69,12 @@ body {
     font-size: 60px;
 }
 
+@media (max-width: 500px) {
+    .header {
+        font-size: 40px;
+    }
+}
+
 .selectedNav {
     color:#6f42c1;
 }
