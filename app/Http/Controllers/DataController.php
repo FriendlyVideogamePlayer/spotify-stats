@@ -73,7 +73,7 @@ class DataController extends Controller
         ])->get('https://api.spotify.com/v1/recommendations?limit=50&seed_artists='.session('recommendedSeeds'));
         
         $data = $response->json();
-            return $data;
+         
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
                 $this->refreshDataAccess();

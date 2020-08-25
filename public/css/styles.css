@@ -63,6 +63,11 @@ body {
     color: #6f42c1;
 }
 
+.cardPurple {
+    border: 2px solid !important;
+    border-color: #6f42c1 !important;
+}
+
 .header {
     text-align: center;
     color: white;
