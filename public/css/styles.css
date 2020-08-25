@@ -23,6 +23,18 @@ body {
     background: rgba(0, 0, 0, 0.7);
 }
 
+.card-home {
+    background-color: #121212;
+}
+
+.extend-index {
+    min-height: calc(100vh - 1px);
+}
+
+.plainItem, .plainitem:hover {
+    color: white !important;
+}
+
 .itemName {
     color: rgba(0, 0, 0, 0);
     text-align: center;
@@ -187,4 +199,14 @@ body {
         margin-right: -15px;
         margin-left: -15px;
     }
+}
+
+.btn-primary {
+    background-color: #6f42c1 !important;
+    border-color: #6f42c1 !important;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: #4c2c87 !important;
+    border-color: #4c2c87 !important;
 }

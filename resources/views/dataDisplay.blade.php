@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <div class="header pb-1">
-        Your top {{$type}} 
+        Your @if($type !== "recommendations") top @endif {{$type}} 
     </div>
 
     @include('components.range')
@@ -33,4 +33,5 @@
 </div>
 
 </body>
+@include('components.footer')
 </html>
