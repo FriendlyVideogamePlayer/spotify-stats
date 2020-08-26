@@ -1,5 +1,5 @@
 @if(isset($range))
-    <ul class="nav justify-content-end mb-3">
+    <ul class="nav adjusting-align mb-3">
         <li class="nav-item">
             <a @if($range == 'short_term') class="nav-link selectedNav" @else class="nav-link" @endif href="http://localhost/spotifystats/public/top{{$type}}?t=short_term">4 Weeks</a>
         </li>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md  mb-1">
+<nav class="navbar navbar-expand-md navbar-dark mb-1">
   <a class="plainItem navbar-brand" >Spotify stats</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
