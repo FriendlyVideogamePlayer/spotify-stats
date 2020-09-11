@@ -24,7 +24,7 @@
                     <div class="itemName"> {{$item['name']}} </div>
                 </div>
                 <div class="card-footer d-md-none">
-                    <small class="text-muted">{{$item['name']}}</small> <br>
+                    <small class="text-card">{{$item['name']}}</small> <br>
                 </div>
             </a>
         @endforeach

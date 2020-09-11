@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     // Main login function that will redirect to Spotify web authorization flow. 
     function login() {
-        header('Location: https://accounts.spotify.com/authorize?client_id='.env("SPOTIFY_CLIENT_ID").'&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fspotifystats%2Fpublic%2Fcallback&scope=user-read-private%20user-top-read%20playlist-read-private');
+        header('Location: https://accounts.spotify.com/authorize?client_id='.env("SPOTIFY_CLIENT_ID").'&response_type=code&redirect_uri=http%3A%2F%2F134.122.70.206%2Fcallback&scope=user-read-private%20user-top-read%20playlist-read-private');
         exit; 
       }
     
@@ -39,7 +39,7 @@ class AuthController extends Controller
         ])->post('https://accounts.spotify.com/api/token', [
             'grant_type' => 'authorization_code',
             'code' => session('code'),
-            'redirect_uri' => 'http://localhost/spotifystats/public/callback',
+            'redirect_uri' => 'http://134.122.70.206/callback',
         ]);
         
         $responseJSON = $response->json();

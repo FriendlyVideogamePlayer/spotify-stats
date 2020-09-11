@@ -6,13 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('toptracks') ? 'selectedNav' : '' }}" href="http://localhost/spotifystats/public/toptracks">Top Tracks</a>
+        <a class="nav-link {{ Request::is('toptracks') ? 'selectedNav' : '' }}" href="http://134.122.70.206/toptracks">Top Tracks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('topartists') ? 'selectedNav' : '' }}" href="http://localhost/spotifystats/public/topartists">Top Artists</a>
+        <a class="nav-link {{ Request::is('topartists') ? 'selectedNav' : '' }}" href="http://134.122.70.206/topartists">Top Artists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="http://localhost/spotifystats/public/recommendations">Reccommendations</a>
+        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="http://134.122.70.206/recommendations">Reccommendations</a>
       </li>
     </ul>
   </div>

@@ -3,6 +3,10 @@ body {
     background-color: #121212;
 }
 
+.text-card {
+    color: white !important;
+}
+
 .card {
     border: none !important; 
 }
@@ -66,11 +70,11 @@ body {
 }
 
 .nav-link, .navbar-brand {
-    color: white;
+    color: white !important;
 }
 
 .nav-link:hover, .navbar-brand:hover {
-    color: #6f42c1;
+    color: #6f42c1 !important;
 }
 
 .cardPurple {
@@ -91,7 +95,7 @@ body {
 }
 
 .selectedNav {
-    color:#6f42c1;
+    color:#6f42c1 !important;
 }
 
 .userImage {
