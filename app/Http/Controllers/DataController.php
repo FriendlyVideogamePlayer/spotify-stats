@@ -41,6 +41,9 @@ class DataController extends Controller
         
         $data = $response->json();
 
+        // $data2 = session()->all();  checking session keys
+        // var_dump($data2);
+
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
                 $this->refreshDataAccess();
