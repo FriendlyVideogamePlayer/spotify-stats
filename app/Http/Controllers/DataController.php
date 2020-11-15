@@ -50,20 +50,22 @@ class DataController extends Controller
                 return $this->getTop($type);
             }
         }
-        
         // If on artists then get artist seeds for reccomended tracks
-        if($type == 'artists') {
-            $recommendedSeeds = [];
-            $i = 0;
+        $recommendedSeeds = [];
+        $i = 0;
 
-            while($i < 5) {
+        while($i < 5) {
+            if($type == 'artists') {
                 $artistId = $data['items'][$i]['id'];
-                array_push($recommendedSeeds, $artistId);
-                $i++;
             }
-
-            session(['recommendedSeeds' => implode('%2C', $recommendedSeeds)]);
+            elseif($type == 'tracks') {
+                $artistId = $data['items'][$i]['artists']['0']['id'];
+            }
+            array_push($recommendedSeeds, $artistId);
+            $i++;
         }
+
+        session(['recommendedSeeds' => implode('%2C', $recommendedSeeds)]);
 
         return view('dataDisplay')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
     }
@@ -76,14 +78,14 @@ class DataController extends Controller
         ])->get('https://api.spotify.com/v1/recommendations?limit=50&seed_artists='.session('recommendedSeeds'));
         
         $data = $response->json();
-         
+
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
                 $this->refreshDataAccess();
                 return $this->getRecommendations();
             }
         }
-
+        
         return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
     }
 
@@ -103,5 +105,14 @@ class DataController extends Controller
         } else {
             session(['userImage' => "Images/noArtist.jpg"]);
         }
+    }
+
+    function getPlaylists() {
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.session('accessToken'),
+        ])->get('https://api.spotify.com/v1/me/playlists?limit=50&offset='.$offset);
+        
+        $data = $response->json();
     }
 }
