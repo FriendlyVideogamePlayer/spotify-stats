@@ -26,7 +26,7 @@ Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artist
 
 Route::get('/recommendations', 'DataController@getRecommendations');
 
-Route::get('/playlists', 'DataController@getPlaylists');
+Route::get('/playlists', ['uses' => 'DataController@getPlaylists', 'offset' => 0]);
 
 /*
 Route::get('/toptracks', 'DataController@getTop');

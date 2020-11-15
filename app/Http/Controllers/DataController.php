@@ -108,11 +108,33 @@ class DataController extends Controller
     }
 
     function getPlaylists() {
+        $offsetVal = (isset($offset)) ? $offset : 0;
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
-        ])->get('https://api.spotify.com/v1/me/playlists?limit=50&offset='.$offset);
+        ])->get('https://api.spotify.com/v1/me/playlists?limit=50&offset='.$offsetVal);
         
         $data = $response->json();
+
+        if(isset($data['error']['status'])) {
+            if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
+                $this->refreshDataAccess();
+                return $this->getPlaylists();
+            }
+        }
+
+        $playlistCount = $data['total'];
+        session(['playlistIds' => []]);
+
+        foreach($data['items'] as $item) {
+            $playlistName = $item['name'];
+            $playlistId = $item['id'];
+            $playlistTrackCount = $item['tracks']['total'];
+            $playlistData = [];
+            array_push($playlistData, $playlistName, $playlistId);
+            Session::push('playlistIds', $playlistData);
+        }
+
+        return view('playlists')->with(['items' => session('playlistIds')]);
     }
 }

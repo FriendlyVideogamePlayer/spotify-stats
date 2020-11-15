@@ -88,6 +88,17 @@ body {
     font-size: 60px;
 }
 
+.playlistHeader {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+
+.playlistForm {
+    max-width: 40%;
+    margin: auto;
+}
+
 @media (max-width: 500px) {
     .header {
         font-size: 40px;
