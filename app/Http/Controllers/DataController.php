@@ -107,11 +107,13 @@ class DataController extends Controller
         }
     }
 
-    function getPlaylists() {
-        $offsetVal = (isset($offset)) ? $offset : 0;
+    function getPlaylists($offset = null) {
+        $offsetVal = ($offset !== null) ? $offset : 0;
+        $offset = $offsetVal;
 
         if($offsetVal == 0 && Session('playlistIds') !== null ) {
             Session::forget('playlistIds');
+            session(['playlistIds' => []]);
         }
 
         $response = Http::withHeaders([
@@ -120,6 +122,9 @@ class DataController extends Controller
         
         $data = $response->json();
 
+        $playlistCount = $data['total'];
+        $offset += 50;
+
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
                 $this->refreshDataAccess();
@@ -127,16 +132,14 @@ class DataController extends Controller
             }
         }
 
-        $playlistCount = $data['total'];
-        session(['playlistIds' => []]);
-
         foreach($data['items'] as $item) {
-            $playlistName = $item['name'];
-            $playlistId = $item['id'];
-            $playlistTrackCount = $item['tracks']['total'];
             $playlistData = [];
-            array_push($playlistData, $playlistName, $playlistId);
+            array_push($playlistData, $item['name'], $item['id']);
             Session::push('playlistIds', $playlistData);
+        }
+
+        if($offset < $playlistCount && $offset < 100) {
+            return $this->getPlaylistTracks($offset);
         }
 
         return view('playlists')->with(['items' => session('playlistIds')]);
@@ -148,7 +151,9 @@ class DataController extends Controller
 
         if($offsetVal == 0 && Session('artistNames') !== null ) {
             Session::forget('artistNames');
+            Session::forget('trackIds');
             session(['artistNames' => []]);
+            session(['trackIds' => []]);
         }
 
         $response = Http::withHeaders([
@@ -170,18 +175,22 @@ class DataController extends Controller
         foreach($data['items'] as $item) {
             $trackName = $item['track']['name'];
             Session::push('artistNames', $trackName);
+
             foreach($item['track']['artists'] as $subItem) {
-                array_push($artistNames, $subItem['name']);
+                Session::push('artistNames', $subItem['name']);
             }
 
-
+            $trackData = [];
+            array_push($trackData, $item['track']['name']);
+            array_push($trackData, $item['track']['id']);
+            Session::push('trackIds', $trackData);
         }
         
         if($offset < $trackCount && $offset < 500) {
             return $this->getPlaylistTracks($playlistId, $offset);
-        
         }
-        
-        return session('artistNames');
+
+        return session('artistNames'); // next func
     }
+
 }
