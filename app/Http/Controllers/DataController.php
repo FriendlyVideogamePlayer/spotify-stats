@@ -247,13 +247,50 @@ class DataController extends Controller
             return $this->getTrackFeatures($offset, $trackCount);
         }
 
-        foreach(session('playlistStats') as $key => $value) {
-            if (is_null($maxDanceability) || $value['danceability'] > $maxDanceability) {
-                $maxDanceability = $value['danceability'];
-                $maxDanceabilityKey = $key;
+        $maxDanceability = $maxEnergy = $maxLoudness = $maxTempo = $maxValence = $maxDuration = null;
+        $maxDanceabilityKey = $maxEnergyKey = $maxLoudnessKey = $maxTempoKey = $maxValenceKey = $maxDurationKey = null;
+
+		foreach(session('playlistStats') as $key => $value) {
+			if (is_null($maxDanceability) || $value['danceability'] > $maxDanceability) {
+				$maxDanceability = $value['danceability'];
+				$maxDanceabilityKey = $key;
+            }
+            if (is_null($maxEnergy) || $value['energy'] > $maxEnergy) {
+                $maxEnergy = $value['energy'];
+                $maxEnergyKey = $key;
+            }
+            if (is_null($maxLoudness) || $value['loudness'] > $maxLoudness) {
+                $maxLoudness = $value['loudness'];
+                $maxLoudnessKey = $key;
+            }
+            if (is_null($maxTempo) || $value['tempo'] > $maxTempo) {
+                $maxTempo = $value['tempo'];
+                $maxTempoKey = $key;
+            }
+            if (is_null($maxValence) || $value['valence'] > $maxValence) {
+                $maxValence = $value['valence'];
+                $maxValenceKey = $key;
+            }
+            if (is_null($maxDuration) || $value['duration'] > $maxDuration) {
+                $maxDuration = $value['duration'];
+                $maxDurationKey = $key;
             }
         }
 
-        return session('playlistStats');
+        $danceabilityTrack = session('trackIds.'.array_search($maxDanceabilityKey, array_column(session('trackIds'), 1)).'.0');
+        $energyTrack = session('trackIds.'.array_search($maxEnergyKey, array_column(session('trackIds'), 1)).'.0');
+        $loudnessTrack = session('trackIds.'.array_search($maxLoudnessKey, array_column(session('trackIds'), 1)).'.0');
+        $tempoTrack = session('trackIds.'.array_search($maxTempoKey, array_column(session('trackIds'), 1)).'.0');
+        $valenceTrack = session('trackIds.'.array_search($maxValenceKey, array_column(session('trackIds'), 1)).'.0');
+        $durationTrack = session('trackIds.'.array_search($maxDurationKey, array_column(session('trackIds'), 1)).'.0');
+        
+        $trackArray = ['danceabilityTrack' => $danceabilityTrack,'energyTrack'=> $energyTrack, 'loudnessTrack' => $loudnessTrack,'tempoTrack' => $tempoTrack,
+        'valenceTrack' => $valenceTrack,'durationTrack' => $durationTrack];
+
+        // im stupid and cant figure out how to properly get the array key name to use :(
+        // $maxDanceability = max(array_column(session('playlistStats'), 'danceability'));
+        // $maxDanceabilityKey = array_search($maxDanceability, array_column(session('playlistStats'), 'danceability'));
+
+        return view('playlistStatistics')->with(['trackArray' => $trackArray]);
     }
 }
