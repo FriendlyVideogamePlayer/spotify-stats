@@ -110,6 +110,10 @@ class DataController extends Controller
     function getPlaylists() {
         $offsetVal = (isset($offset)) ? $offset : 0;
 
+        if($offsetVal == 0 && Session('playlistIds') !== null ) {
+            Session::forget('playlistIds');
+        }
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
         ])->get('https://api.spotify.com/v1/me/playlists?limit=50&offset='.$offsetVal);
@@ -136,5 +140,48 @@ class DataController extends Controller
         }
 
         return view('playlists')->with(['items' => session('playlistIds')]);
+    }
+
+    function getPlaylistTracks($playlistId, $offset = null) {
+        $offsetVal = ($offset !== null) ? $offset : 0;
+        $offset = $offsetVal;
+
+        if($offsetVal == 0 && Session('artistNames') !== null ) {
+            Session::forget('artistNames');
+            session(['artistNames' => []]);
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.session('accessToken'),
+        ])->get('https://api.spotify.com/v1/playlists/'.$playlistId.'/tracks?fields=items(track(id%2Cname%2Cartists))%2C%20total%2C%20offset%2C%20limit%2C%20next%2C%20previous&limit=100&offset='.$offsetVal);
+        
+        $data = $response->json();
+
+        if(isset($data['error']['status'])) {
+            if($data['error']['status'] == '401') {
+                $this->refreshDataAccess();
+                return $this->getPlaylistTracks($playlistId);
+            }
+        }
+        
+        $trackCount = $data['total'];
+        $offset += 100;
+
+        foreach($data['items'] as $item) {
+            $trackName = $item['track']['name'];
+            Session::push('artistNames', $trackName);
+            foreach($item['track']['artists'] as $subItem) {
+                array_push($artistNames, $subItem['name']);
+            }
+
+
+        }
+        
+        if($offset < $trackCount && $offset < 500) {
+            return $this->getPlaylistTracks($playlistId, $offset);
+        
+        }
+        
+        return session('artistNames');
     }
 }

@@ -26,14 +26,6 @@ Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artist
 
 Route::get('/recommendations', 'DataController@getRecommendations');
 
-Route::get('/playlists', ['uses' => 'DataController@getPlaylists', 'offset' => 0]);
+Route::get('/playlists', 'DataController@getPlaylists');
 
-/*
-Route::get('/toptracks', 'DataController@getTop');
-
-Route::get('/topartists', 'DataController@getTop');
-
-Route::get('/callbak', function () {
-    return view('top');
-});
-
+Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks');
