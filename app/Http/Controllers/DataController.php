@@ -190,7 +190,70 @@ class DataController extends Controller
             return $this->getPlaylistTracks($playlistId, $offset);
         }
 
-        return session('artistNames'); // next func
+        return $this->getTrackFeatures(0, $trackCount);
     }
 
+    function getTrackFeatures($offset = null, $trackCount) {
+        $offsetVal = ($offset !== null) ? $offset : 0;
+        $offset = $offsetVal;
+
+        $slicedTrackIds = [];
+        $i = $offset;
+        while($i < $offset+100 && $i < $trackCount) {
+            array_push($slicedTrackIds, session('trackIds')[$i][1]);
+            $i++;
+        }
+
+        $trackIdList = implode(',', $slicedTrackIds);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.session('accessToken'),
+        ])->get('https://api.spotify.com/v1/audio-features?ids='.$trackIdList);
+        
+        $data = $response->json();
+
+        if(isset($data['error']['status'])) {
+            if($data['error']['status'] == '401') {
+                $this->refreshDataAccess();
+                return $this->getPlaylistTracks($playlistId);
+            }
+        }
+
+        if($offset == 0 && session('playlistStats') !== null) {
+            Session::forget('playlistStats');
+            session(['playlistStats' => []]);
+        }
+        elseif($offset == 0) {
+            session(['playlistStats' => []]);
+        }
+
+        foreach($data['audio_features'] as $item) {
+            $duration_ms  = $item['duration_ms'];
+			$duration_m = floor($duration_ms / 60000);
+			$duration_s = floor(($duration_ms / 1000) % 60);
+			$formating = '%02u:%02u';
+            $duration = sprintf($formating, $duration_m, $duration_s);
+                
+            Session::push('playlistStats.'.$item['id'].'.danceability', $item['danceability']);
+            Session::push('playlistStats.'.$item['id'].'.energy', $item['energy']);
+            Session::push('playlistStats.'.$item['id'].'.loudness', $item['loudness']);
+            Session::push('playlistStats.'.$item['id'].'.tempo', $item['tempo']);
+            Session::push('playlistStats.'.$item['id'].'.valence', $item['valence']);
+            Session::push('playlistStats.'.$item['id'].'.duration', $duration);
+        }
+
+        $offset += 100;
+        if($offset < $trackCount && $offset < 500) {
+            return $this->getTrackFeatures($offset, $trackCount);
+        }
+
+        foreach(session('playlistStats') as $key => $value) {
+            if (is_null($maxDanceability) || $value['danceability'] > $maxDanceability) {
+                $maxDanceability = $value['danceability'];
+                $maxDanceabilityKey = $key;
+            }
+        }
+
+        return session('playlistStats');
+    }
 }
