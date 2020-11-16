@@ -190,6 +190,9 @@ class DataController extends Controller
             return $this->getPlaylistTracks($playlistId, $offset);
         }
 
+        $selectedPlaylist = array_search($playlistId, array_column(session('playlistIds'), 1));
+        session(['selectedPlaylist' => session('playlistIds.'.$selectedPlaylist.'.0')]);
+
         return $this->getTrackFeatures(0, $trackCount);
     }
 
@@ -291,6 +294,6 @@ class DataController extends Controller
         // $maxDanceability = max(array_column(session('playlistStats'), 'danceability'));
         // $maxDanceabilityKey = array_search($maxDanceability, array_column(session('playlistStats'), 'danceability'));
 
-        return view('playlistStatistics')->with(['trackArray' => $trackArray]);
+        return view('playlistStatistics')->with(['trackArray' => $trackArray, 'title' => session('selectedPlaylist')]);
     }
 }

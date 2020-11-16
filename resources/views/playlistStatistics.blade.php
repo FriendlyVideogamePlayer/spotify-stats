@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <div class="playlistHeader pb-1">
-        Statistics for your playlist
+        Statistics for your playlist "{{$title}}"
     </div>
 
     <div> Most Danceable   {{$trackArray['danceabilityTrack']}} </div>
