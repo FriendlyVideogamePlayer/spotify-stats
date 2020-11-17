@@ -131,6 +131,17 @@ body {
     max-width:320px;
 }
 
+.cardPlaylist {
+    height: 150px; 
+    min-width: 320px; 
+    max-width:320px;
+    border: 3px solid !important;
+    border-color: #6f42c1 !important;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+}
+
 /* Media queries to enable more items to show at lower resolutions*/
 
 /* Four items (from 3) */

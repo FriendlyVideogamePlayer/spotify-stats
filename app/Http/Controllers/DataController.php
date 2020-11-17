@@ -286,13 +286,18 @@ class DataController extends Controller
         $tempoTrack = session('trackIds.'.array_search($maxTempoKey, array_column(session('trackIds'), 1)).'.0');
         $valenceTrack = session('trackIds.'.array_search($maxValenceKey, array_column(session('trackIds'), 1)).'.0');
         $durationTrack = session('trackIds.'.array_search($maxDurationKey, array_column(session('trackIds'), 1)).'.0');
-        
-        $trackArray = ['danceabilityTrack' => $danceabilityTrack,'energyTrack'=> $energyTrack, 'loudnessTrack' => $loudnessTrack,'tempoTrack' => $tempoTrack,
-        'valenceTrack' => $valenceTrack,'durationTrack' => $durationTrack];
 
-        // im stupid and cant figure out how to properly get the array key name to use :(
-        // $maxDanceability = max(array_column(session('playlistStats'), 'danceability'));
-        // $maxDanceabilityKey = array_search($maxDanceability, array_column(session('playlistStats'), 'danceability'));
+        $trackArray = ['danceability' => $danceabilityTrack, 'energy'=> $energyTrack, 'loudness' => $loudnessTrack,'tempo' => $tempoTrack,
+        'valence' => $valenceTrack,'duration' => $durationTrack];
+
+        // $features = [$maxDanceabilityKey, $maxEnergyKey, $maxLoudnessKey, $maxTempoKey, $maxValenceKey, $maxDurationKey];
+        // $trackLinks = [];
+        // foreach($features as $feature) {
+        //     array_push($trackLinks,'https://open.spotify.com/track/'.$feature);
+        // }
+
+        // $trackArray = [['feature' => $danceabilityTrack, 'link' => $trackLinks[0]],['feature'=> $energyTrack, 'link' => $trackLinks[1]], ['feature' => $loudnessTrack, 'link' => $trackLinks[2]], 
+        // ['feature' => $tempoTrack, 'link' => $trackLinks[3]], ['feature' => $valenceTrack, 'link' => $trackLinks[4]],['feature' => $durationTrack, 'link' => $trackLinks[5]]];
 
         return view('playlistStatistics')->with(['trackArray' => $trackArray, 'title' => session('selectedPlaylist')]);
     }

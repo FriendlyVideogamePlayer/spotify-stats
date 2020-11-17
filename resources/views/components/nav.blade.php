@@ -12,7 +12,7 @@
         <a class="nav-link {{ Request::is('topartists') ? 'selectedNav' : '' }}" href="http://134.122.70.206/topartists">Top Artists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="http://134.122.70.206/recommendations">Reccommendations</a>
+        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="http://134.122.70.206/recommendations">Recommendations</a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('playlists') ? 'selectedNav' : '' }}" href="http://134.122.70.206/playlists">Playlists</a>
