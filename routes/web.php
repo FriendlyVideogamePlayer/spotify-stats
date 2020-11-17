@@ -30,4 +30,3 @@ Route::get('/playlists', 'DataController@getPlaylists');
 
 Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks');
 
-Route::get('/playlisttest', 'DataController@getTrackFeatures');

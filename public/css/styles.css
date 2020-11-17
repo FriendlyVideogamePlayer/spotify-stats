@@ -95,13 +95,37 @@ body {
 }
 
 .playlistForm {
-    max-width: 40%;
+    max-width: 50%;
     margin: auto;
 }
 
 @media (max-width: 500px) {
     .header {
         font-size: 40px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .playlistForm {
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 1150px) {
+    .playlistForm {
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 850px) {
+    .playlistForm {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 650px) {
+    .playlistForm {
+        max-width: 90%;
     }
 }
 

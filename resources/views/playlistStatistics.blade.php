@@ -12,12 +12,12 @@
         <div class="row">
             @php ($i = 0)
             @foreach($trackArray as $item => $value)
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-6">
                     <div class="card mb-4 cardPlaylist">
                         <div class="card-body">
                             <h5 class="card-title">Track with highest {{$item}}</h5>
                             <p class="card-text">{{$value}}</p>
-                            <a href="#" class="btn btn-primary">Listen on Spotify!</a>
+                            <!-- <a href="#" class="btn btn-primary">Listen on Spotify!</a> -->
                         </div>
                     </div>
                 </div>

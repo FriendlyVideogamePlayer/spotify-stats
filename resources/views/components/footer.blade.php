@@ -1,3 +1,3 @@
 <footer class="footer">
-    <a class="nav-link text-center pt-3" href="https://github.com/FriendlyVideogamePlayer">© 2020 Copyright: FriendlyVideogamePlayer</a>
+    <a class="nav-link text-center pt-3" href="https://github.com/FriendlyVideogamePlayer">©FriendlyVideogamePlayer: 2020</a>
 </footer>

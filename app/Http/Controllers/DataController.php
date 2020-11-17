@@ -128,7 +128,7 @@ class DataController extends Controller
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
                 $this->refreshDataAccess();
-                return $this->getPlaylists();
+                return $this->getPlaylists($offset);
             }
         }
 
@@ -148,7 +148,7 @@ class DataController extends Controller
     function getPlaylistTracks($playlistId, $offset = null) {
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
-
+        
         if($offsetVal == 0 && Session('artistNames') !== null ) {
             Session::forget('artistNames');
             Session::forget('trackIds');
@@ -165,7 +165,7 @@ class DataController extends Controller
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401') {
                 $this->refreshDataAccess();
-                return $this->getPlaylistTracks($playlistId);
+                return $this->getPlaylistTracks($playlistId, $offset);
             }
         }
         
@@ -218,7 +218,7 @@ class DataController extends Controller
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401') {
                 $this->refreshDataAccess();
-                return $this->getPlaylistTracks($playlistId);
+                return $this->getTrackFeatures($offset, $trackCount);
             }
         }
 
