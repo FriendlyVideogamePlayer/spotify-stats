@@ -2,7 +2,21 @@
 body {
     background-color: #121212;
 }
+/* try to get footer sticky */
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
+.container-fluid {
+    min-height: 100% !important;
+    margin-bottom: -50px;
+}
+
+.footer, .fExtend {
+    height: 50px;
+}
+/* */
 .text-card {
     color: white !important;
 }

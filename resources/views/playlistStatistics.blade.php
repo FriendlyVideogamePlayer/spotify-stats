@@ -31,12 +31,7 @@
                 @php ($i++)
             @endforeach
     </div>
-
-
-
-
 </div>
-
 </body>
 @include('components.footer')
 </html>
