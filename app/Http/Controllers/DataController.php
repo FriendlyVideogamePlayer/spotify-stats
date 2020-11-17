@@ -122,7 +122,6 @@ class DataController extends Controller
         
         $data = $response->json();
 
-        $playlistCount = $data['total'];
         $offset += 50;
 
         if(isset($data['error']['status'])) {
@@ -131,6 +130,8 @@ class DataController extends Controller
                 return $this->getPlaylists($offset);
             }
         }
+
+        $playlistCount = $data['total'];
 
         foreach($data['items'] as $item) {
             $playlistData = [];
