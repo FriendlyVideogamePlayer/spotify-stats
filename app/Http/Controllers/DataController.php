@@ -254,11 +254,14 @@ class DataController extends Controller
         $maxDanceability = $maxEnergy = $maxLoudness = $maxTempo = $maxValence = $maxDuration = null;
         $maxDanceabilityKey = $maxEnergyKey = $maxLoudnessKey = $maxTempoKey = $maxValenceKey = $maxDurationKey = null;
 
+        $danceabilityVals = $tempoVals = $valenceVals = [];
+
 		foreach(session('playlistStats') as $key => $value) {
 			if (is_null($maxDanceability) || $value['danceability'] > $maxDanceability) {
 				$maxDanceability = $value['danceability'];
 				$maxDanceabilityKey = $key;
             }
+            array_push($danceabilityVals, $value['danceability']);
             if (is_null($maxEnergy) || $value['energy'] > $maxEnergy) {
                 $maxEnergy = $value['energy'];
                 $maxEnergyKey = $key;
@@ -271,16 +274,18 @@ class DataController extends Controller
                 $maxTempo = $value['tempo'];
                 $maxTempoKey = $key;
             }
+            array_push($tempoVals, $value['tempo']);
             if (is_null($maxValence) || $value['valence'] > $maxValence) {
                 $maxValence = $value['valence'];
                 $maxValenceKey = $key;
             }
+            array_push($valenceVals, $value['valence']);
             if (is_null($maxDuration) || $value['duration'] > $maxDuration) {
                 $maxDuration = $value['duration'];
                 $maxDurationKey = $key;
             }
         }
-
+        $maxVals = [$maxDanceability, $maxEnergy, $maxLoudness, $maxTempo, $maxValence, $maxDuration];
         $danceabilityTrack = session('trackIds.'.array_search($maxDanceabilityKey, array_column(session('trackIds'), 1)).'.0');
         $energyTrack = session('trackIds.'.array_search($maxEnergyKey, array_column(session('trackIds'), 1)).'.0');
         $loudnessTrack = session('trackIds.'.array_search($maxLoudnessKey, array_column(session('trackIds'), 1)).'.0');
@@ -300,6 +305,7 @@ class DataController extends Controller
         // $trackArray = [['feature' => $danceabilityTrack, 'link' => $trackLinks[0]],['feature'=> $energyTrack, 'link' => $trackLinks[1]], ['feature' => $loudnessTrack, 'link' => $trackLinks[2]], 
         // ['feature' => $tempoTrack, 'link' => $trackLinks[3]], ['feature' => $valenceTrack, 'link' => $trackLinks[4]],['feature' => $durationTrack, 'link' => $trackLinks[5]]];
 
-        return view('playlistStatistics')->with(['trackArray' => $trackArray, 'title' => session('selectedPlaylist')]);
+        return view('playlistStatistics')->with(['trackArray' => $trackArray, 'title' => session('selectedPlaylist'), 'danceabilityVals' =>$danceabilityVals, 'tempoVals' => $tempoVals,
+        'valenceVals' => $valenceVals, 'maxVals' => $maxVals]);
     }
 }

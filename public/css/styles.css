@@ -169,17 +169,6 @@ html, body {
     max-width:320px;
 }
 
-.cardPlaylist {
-    height: 150px; 
-    min-width: 320px; 
-    max-width:320px;
-    border: 3px solid !important;
-    border-color: #6f42c1 !important;
-    background-color: #121212;
-    color: white;
-    text-align: center;
-}
-
 /* Media queries to enable more items to show at lower resolutions*/
 
 /* Four items (from 3) */
@@ -266,9 +255,13 @@ html, body {
         max-width: 140px ;
     }
 }
-
+/* using two seperate rulesets to get over the specifity issue on playlist stats page */
 @media (min-width: 330px) {
-    .card-deck .card {
+    .card {
+        margin-right: 20px !important;
+        margin-left: 20px !important;
+    }
+    .card-deck {
         margin-right: 20px !important;
         margin-left: 20px !important;
     }
@@ -294,4 +287,31 @@ html, body {
 .btn-primary:hover, .btn-primary:active {
     background-color: #4c2c87 !important;
     border-color: #4c2c87 !important;
+}
+
+.cardPlaylist {
+    height: 150px; 
+    min-width: 320px; 
+    max-width:320px;
+    border: 3px solid !important;
+    border-color: #6f42c1 !important;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    margin-right: 50px !important;
+    margin-left: 50px !important;
+}
+
+.playlistCardDeck {
+    margin-left: 100px !important;
+    margin-right: 100px !important;
+}
+
+@media (min-width: 330px) {
+    .cardPlaylist {
+        height: 150px; 
+        width: 320px; 
+        margin-right: 50px !important;
+        margin-left: 50px !important;
+    }
 }
