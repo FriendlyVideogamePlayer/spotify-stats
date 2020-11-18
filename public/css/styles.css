@@ -307,11 +307,47 @@ html, body {
     margin-right: 100px !important;
 }
 
-@media (min-width: 330px) {
+@media (max-width: 1506px) {
     .cardPlaylist {
         height: 150px; 
         width: 320px; 
-        margin-right: 50px !important;
-        margin-left: 50px !important;
+        margin-right: 30px !important;
+        margin-left: 30px !important;
     }
+}
+
+@media (max-width: 1386px) {
+    .cardPlaylist {
+        height: 150px; 
+        width: 320px; 
+        margin-right: 15px !important;
+        margin-left: 15px !important;
+    }
+}
+
+@media (max-width: 1296px) {
+    .playlistCardDeck {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+}
+
+@media (max-width: 1136px) {
+    .cardPlaylist {
+        min-width: 290px !important;
+        height: 150px; 
+        width: 300px; 
+    }
+}
+
+.cardSvg {
+    height: 200px; 
+    width: 450px !important; 
+    border: 3px solid !important;
+    border-color: #6f42c1 !important;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    margin-right: 10px !important;
+    margin-left: 10px !important;
 }
