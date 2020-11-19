@@ -3,7 +3,7 @@
 @include('components.nav')
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid playlistFooter">
     <div class="playlistHeader pt-3 pb-1">
         Choose a playlist that you follow
     </div>
