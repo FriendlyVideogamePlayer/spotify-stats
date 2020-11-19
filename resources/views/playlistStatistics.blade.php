@@ -24,11 +24,11 @@
         <div class="card mb-4 cardSvg">
             <div class="card-body">
                 <h5 class="card-title playlistTitle">Danceability distribution</h5>
-                <svg class="" width="400" height="80" role="img">
+                <svg class="" width="350" height="80" role="img">
                     <title id="title">Danceability distribution</title>
                     <g class="">
                         @foreach($danceabilityVals as $item) { 
-                            @php ($danceVal = $item[0] * 400)
+                            @php ($danceVal = $item[0] * 350)
                             <rect width="1" height="100" x="{{$danceVal}}"></rect>
                         @endforeach
                     </g>
@@ -37,18 +37,18 @@
                     <p class="leftA">Lower</p>
                     <p class="rightA">Higher</p>
                 </div>
-                <p class="card-text mt-4">Danceability is a measurement of how danceable Spotify believes a track to be.</p>
+                <p class="card-text alignDist mt-4">Danceability is a measurement of how danceable Spotify believes a track to be.</p>
             </div>
         </div>
 
         <div class="card mb-4 cardSvg">
             <div class="card-body">
                 <h5 class="card-title playlistTitle">Tempo distribution</h5>
-                <svg class="" width="400" height="80" role="img">
+                <svg class="" width="350" height="80" role="img">
                     <title id="title">Tempo distribution</title>
                         <g class="">
                             @foreach($tempoVals as $item) { 
-                                @php ($result = 400 / $maxVals[3][0])
+                                @php ($result = 350 / $maxVals[3][0])
                                 @php ($tempoVal = $item[0] * $result)
                                 <rect width="1" height="100" x="{{$tempoVal}}"></rect>
                             @endforeach
@@ -58,18 +58,19 @@
                     <p class="leftA">Lower</p>
                     <p class="rightA">Higher</p>
                 </div>
-                <p class="card-text mt-4">Tempo is a measurement of a track's BPM.</p>
+                <p class="card-text alignDist mt-4">Tempo is a measurement of a track's BPM.</p>
             </div>
         </div>
-
+    </div>
+    <div class="card-deck justify-content-center my-4 deckSvg">
         <div class="card mb-4 cardSvg">
             <div class="card-body">
                 <h5 class="card-title playlistTitle">Valence distribution</h5>
-                <svg class="" width="400" height="80" role="img">
+                <svg class="" width="350" height="80" role="img">
                     <title id="title">Valence distribution</title>
                         <g class="">
                             @foreach($valenceVals as $item) { 
-                                @php ($valenceVal = $item[0] * 400)
+                                @php ($valenceVal = $item[0] * 350)
                                 <rect width="1" height="100" x="{{$valenceVal}}"></rect>
                             @endforeach
                         </g>
@@ -78,7 +79,7 @@
                     <p class="leftA">Lower</p>
                     <p class="rightA">Higher</p>
                 </div>
-                <p class="card-text mt-4">Valence is a measurement of how "Positive" a song is. Higher valence songs probably sound "happier".</p>
+                <p class="card-text alignDist mt-4">Valence is a measurement of how "Positive" a song is. Higher valence songs sound "happier".</p>
             </div>
         </div>
     </div>

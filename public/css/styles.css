@@ -87,8 +87,12 @@ html, body {
     color: white !important;
 }
 
-.nav-link:hover, .navbar-brand:hover {
+.nav-link:hover {
     color: #6f42c1 !important;
+}
+
+.navbar-brand:hover {
+    color: #ffffff;
 }
 
 .cardPurple {
@@ -265,7 +269,7 @@ html, body {
         margin-right: 20px !important;
         margin-left: 20px !important;
     }
-    .card-deck {
+    .deckSvg {
         margin-right: 20px !important;
         margin-left: 20px !important;
     }
@@ -393,13 +397,28 @@ html, body {
     }
 }
 
+@media (max-width: 966px) {
+    .deckSvg {
+        margin-right: 30px !important;
+        margin-left: 30px !important;
+    }
+    .cardSvg {
+        height: 200px; 
+        min-width: 500px !important; 
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+}
+
+
+
 svg {
     border: 2px solid !important;
     border-color: #6f42c1 !important;
 }
 
 rect {
-    fill: #6f42c1;
+    fill: #ffffff;
 }
 
 .playlistFooter {
@@ -415,6 +434,6 @@ rect {
 }
 
 .alignDist {
-    width: 400px;
+    width: 350px;
     margin: 0 auto;
 }

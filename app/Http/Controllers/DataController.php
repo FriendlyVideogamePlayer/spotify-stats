@@ -147,6 +147,10 @@ class DataController extends Controller
     }
 
     function getPlaylistTracks($playlistId, $offset = null) {
+        if(!Session::has('accessToken')) {
+            return redirect('/');
+        }
+        
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
         

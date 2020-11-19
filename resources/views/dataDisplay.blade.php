@@ -20,10 +20,10 @@
             @else
                 <img class="artistImage card-img-top" src="{{$item['album']['images']['1']['url'] ?? asset('images/noimage.png')}}" alt="Card image cap">
             @endif
-                <div class="extend card-img-overlay overlay d-sm-none d-md-block">
+                <div class="extend card-img-overlay overlay d-sm-none d-lg-block">
                     <div class="itemName"> {{$item['name']}} </div>
                 </div>
-                <div class="card-footer d-md-none">
+                <div class="card-footer d-lg-none">
                     <small class="text-card">{{$item['name']}}</small> <br>
                 </div>
             </a>
