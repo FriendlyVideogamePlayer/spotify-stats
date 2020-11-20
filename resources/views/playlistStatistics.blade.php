@@ -1,10 +1,10 @@
-<html>
+<html lang="en">
 @include('components.head')
 @include('components.nav')
 <body>
 
-<div class="container-fluid ">
-    <div class="playlistHeader pb-1 mb-4">
+<div class="container-fluid" role="main">
+    <div class="playlistHeader pb-1 mb-4" role="heading" aria-level="1">
         Statistics for your playlist "{{$title}}"
     </div>
 

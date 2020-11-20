@@ -1,9 +1,9 @@
-<html>
+<html lang="en">
 @include('components.head')
 <body>
-<div class="extend-index">
+<div class="extend-index" role="main">
     <div class="container justify-content-center">
-        <div class="header pb-5 pt-5">
+        <div class="header pb-5 pt-5" role="heading" aria-level="1">
             Spotify stats
         </div>
         <div class="index">

@@ -1,26 +1,26 @@
-<html>
+<html lang="en">
 @include('components.head')
 @include('components.nav')
 <body>
 
-<div class="container-fluid playlistFooter">
-    <div class="playlistHeader pt-3 pb-1">
+<div class="container-fluid playlistFooter" role="main">
+    <div class="playlistHeader pt-3 pb-1" role="heading" aria-level="1">
         Choose a playlist that you follow
     </div>
 
     <div class="form-group playlistForm">
-        <select class="form-control mt-3 mb-5" id="playlistSelect" onchange="window.location='http://134.122.70.206/playlist/' + this.value">
+        <select class="form-control mt-3 mb-5" id="playlistSelect" onchange="window.location='http://134.122.70.206/playlist/' + this.value" aria-label="Select a playlist you follow to get statistics for it">
             <option disabled selected value> Select a playlist </option>
             @foreach($items as $item)
                 <option class="option"  value="{{$item[1]}}">{{$item[0]}}</option>
             @endforeach
         </select>
 
-        <div class="playlistHeader pt-2 pb-1">
+        <div id="inputDesc" class="playlistHeader pt-2 pb-1">
         Alternatively insert a link below to a playlist instead.
         </div>
         
-        <input class="form-control my-4" type="text" id="playlistURL" placeholder="e.g https://open.spotify.com/playlist/37i9dQZF1DXa8NOEUWPn9W"> 
+        <input class="form-control my-4" type="text" id="playlistURL" placeholder="e.g https://open.spotify.com/playlist/37i9dQZF1DXa8NOEUWPn9W" aria-labelledby="inputDesc"> 
         <div class="index"> <button onclick="playlistSelect();" class="btn btn-primary">Choose!</button></div>
     </div>
 
