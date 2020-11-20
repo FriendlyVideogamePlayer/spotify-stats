@@ -43,6 +43,13 @@ class AuthController extends Controller
         ]);
         
         $responseJSON = $response->json();
+
+        if(isset($responseJSON['error']['status'])) {
+          if($responseJSON['error']['status'] == '401' || $responseJSON['error']['status'] == '400') {
+            Session::forget('code');
+            return redirect('/');
+          }
+      }
         
         session(['accessToken' => $responseJSON['access_token']]);
         session(['refreshToken' => $responseJSON['refresh_token']]); 

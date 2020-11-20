@@ -72,6 +72,9 @@ class DataController extends Controller
 
     // Gets a user reccommended tracks based upon their top artists
     function getRecommendations() {
+        if(!Session::has('accessToken')) {
+            return redirect('/');
+        }
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
@@ -108,6 +111,10 @@ class DataController extends Controller
     }
 
     function getPlaylists($offset = null) {
+        if(!Session::has('accessToken')) {
+            return redirect('/');
+        }
+        
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
 
