@@ -429,6 +429,10 @@ rect {
     min-height: 86% !important;
 }
 
+.homeFooter {
+    min-height: 89% !important;
+}
+
 .leftA {
     float: left;
 }

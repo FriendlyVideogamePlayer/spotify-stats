@@ -4,7 +4,7 @@
 <body>
 
 <div class="container-fluid" role="main">
-    <div class="playlistHeader pb-1 mb-4" role="heading" aria-level="1">
+    <div class="playlistHeader pb-1 mb-4">
         Statistics for your playlist "{{$title}}"
     </div>
 

@@ -16,6 +16,9 @@ Spotify stats is a site that will show you your top tracks and artists as well a
 #### Recommendations page
 ![](public/images/recommendations.png)
 
+#### Statistics page
+![](public/images/statistics.png)
+
 #### Mobile view
 The mobile view has the content that is usually displayed ON the art, instead, displayed below it since hovering on mobile devices is difficult.
 
