@@ -37,7 +37,7 @@ html, body {
     text-align: center;
 }
 
-.overlay:hover {
+.overlay:hover, .overlay:focus {
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -49,7 +49,7 @@ html, body {
     min-height: calc(100vh - 1px);
 }
 
-.plainItem, .plainitem:hover {
+.plainItem, .plainitem:hover, .plainitem:focus {
     color: white !important;
 }
 
@@ -75,7 +75,7 @@ html, body {
     z-index: +1;
 }
 
-.itemName:hover {
+.itemName:hover, .itemName:focus {
     color: rgba(255, 255, 255, 0.999);
 }
 
@@ -87,7 +87,7 @@ html, body {
     color: white !important;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link:focus {
     color: #6f42c1 !important;
 }
 
@@ -292,7 +292,7 @@ html, body {
     border-color: #6f42c1 !important;
 }
 
-.btn-primary:hover, .btn-primary:active {
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
     background-color: #4c2c87 !important;
     border-color: #4c2c87 !important;
 }
@@ -444,4 +444,16 @@ rect {
 .alignDist {
     width: 350px;
     margin: 0 auto;
+}
+/* make top cards tab-able */
+.card-home:focus .overlay{
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.card-home:focus .plainitem {
+    color: white !important;
+}
+
+.card-home:focus .itemName {
+    color: rgba(255, 255, 255, 0.999);
 }
