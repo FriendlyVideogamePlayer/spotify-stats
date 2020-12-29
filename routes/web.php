@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
 Route::get('/callback', 'AuthController@callback');
 
 Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)');
