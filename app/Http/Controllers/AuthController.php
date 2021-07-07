@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     // Main login function that will redirect to Spotify web authorization flow. 
     function login() {
-        header('Location: https://accounts.spotify.com/authorize?client_id='.env("SPOTIFY_CLIENT_ID").'&response_type=code&redirect_uri=http%3A%2F%2F134.122.70.206%2Fcallback&scope=user-read-private%20user-top-read%20playlist-read-private');
+        header('Location: https://accounts.spotify.com/authorize?client_id='.env("SPOTIFY_CLIENT_ID").'&response_type=code&redirect_uri=http%3A%2F%2F134.122.70.206%2Fcallback&scope=user-read-private%20user-top-read%20playlist-read-private%20playlist-modify-public%20user-read-currently-playing');
         exit; 
       }
     
