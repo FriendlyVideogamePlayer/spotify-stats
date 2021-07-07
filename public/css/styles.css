@@ -170,6 +170,16 @@ html, body {
     max-width: 320px ;
 }
 
+.currentImage {
+    max-height: 120px ;
+    max-width: 120px ;
+}
+
+.currentTrackDetails {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
 
 .extend {
     width: 100% !important;

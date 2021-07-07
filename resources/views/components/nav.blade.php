@@ -17,6 +17,9 @@
       <li class="nav-item">
         <a class="nav-link {{ Request::is('playlists') ? 'selectedNav' : '' }}" href="http://134.122.70.206/playlists">Playlists</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('morelikethis') ? 'selectedNav' : '' }}" href="http://134.122.70.206/morelikethis">More like this</a>
+      </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse justify-content-end" id="navbarRight">

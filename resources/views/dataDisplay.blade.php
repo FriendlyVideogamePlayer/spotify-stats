@@ -4,10 +4,13 @@
 <body>
 
 <div class="container-fluid" role="main">
-
-    <div class="header pb-1" role="heading" aria-level="1">
-        Your @if($type !== "recommendations") top @endif {{$type}} 
-    </div>
+    @if($type == "currentTrack")
+        @include('components.currentTrackDetails')
+    @else
+        <div class="header pb-1" role="heading" aria-level="1">
+            Your @if($type !== "recommendations") top @endif {{$type}} 
+        </div>
+    @endif
 
     @include('components.range')
 
