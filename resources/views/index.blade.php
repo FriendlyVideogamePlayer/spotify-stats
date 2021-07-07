@@ -14,7 +14,7 @@
     </div>
 
     <div class="album pt-3">
-        <div class="container-fluid">
+        <div class="container-fluid indexSize">
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <div class="card mb-4 box-shadow card-home">

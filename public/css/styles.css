@@ -13,6 +13,10 @@ html, body {
     margin-bottom: -50px;
 }
 
+.indexSize {
+    min-height: 50% !important;
+}
+
 .footer, .fExtend {
     height: 50px;
 }
@@ -57,7 +61,7 @@ html, body {
     justify-content: flex-end !important;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 676px) {
     .adjusting-align {
         justify-content: center !important;
     }
