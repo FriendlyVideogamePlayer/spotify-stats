@@ -341,9 +341,10 @@ class DataController extends Controller
                 $this->refreshDataAccess();
                 return $this->getCurrentTrack();
             }
-            if($data['error']['status'] == '204') {
-                return view('dataDisplay')->with(['currentTrack' => '204-unavailable']);
-            }
+        }
+
+        if($data == null) {
+            return view('dataDisplay')->with(['type' => '204-unavailable']);
         }
 
         return $this->getRecommendationsFromTrack($data['item']);
