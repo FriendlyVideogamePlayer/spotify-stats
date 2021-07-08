@@ -159,17 +159,36 @@ html, body {
     color:#8F6DD0 !important;
 }
 
+.navbar-underline {
+    border-bottom: 1px solid #333333;
+}
+
+.navbarUserName {
+    padding: .0rem 1rem !important;
+}
+
 .userImage {
-    width:50px;
-    height: 50px;
+    width:35px;
+    height:35px;
 
 }
 
 .artistImage {
-    max-height: 320px ;
-    max-width: 320px ;
+    max-height: 320px;
+    max-width: 320px;
 }
 
+.currentImage {
+    max-height: 90px;
+    max-width: 90px;
+    padding-right: 10px;
+}
+
+.currentTrackDetails {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
 
 .extend {
     width: 100% !important;

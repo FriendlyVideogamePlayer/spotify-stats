@@ -94,7 +94,6 @@ class DataController extends Controller
 
     // Gets a user's display name and image'
     function getDisplayInfo() {
-
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
         ])->get('https://api.spotify.com/v1/me');
@@ -110,6 +109,7 @@ class DataController extends Controller
         }
     }
 
+    // Gets a list of all playlists a user follows or owns
     function getPlaylists($offset = null) {
         if(!Session::has('accessToken')) {
             return redirect('/');
@@ -153,6 +153,7 @@ class DataController extends Controller
         return view('playlists')->with(['items' => session('playlistIds')]);
     }
 
+    // Gets all of the tracks within a specified playlist
     function getPlaylistTracks($playlistId, $offset = null) {
         if(!Session::has('accessToken')) {
             return redirect('/');
@@ -208,6 +209,7 @@ class DataController extends Controller
         return $this->getTrackFeatures(0, $trackCount);
     }
 
+    // Gets the Spotify "features" of a track such as danceability
     function getTrackFeatures($offset = null, $trackCount) {
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
@@ -320,5 +322,53 @@ class DataController extends Controller
 
         return view('playlistStatistics')->with(['trackArray' => $trackArray, 'title' => session('selectedPlaylist'), 'danceabilityVals' =>$danceabilityVals, 'tempoVals' => $tempoVals,
         'valenceVals' => $valenceVals, 'maxVals' => $maxVals]);
+    }
+
+    // Gets the current track a user is listening to on spotify
+    function getCurrentTrack() {
+        if(!Session::has('accessToken')) {
+            return redirect('/');
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.session('accessToken'),
+        ])->get('https://api.spotify.com/v1/me/player/currently-playing');
+        
+        $data = $response->json();
+
+        if(isset($data['error']['status'])) {
+            if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
+                $this->refreshDataAccess();
+                return $this->getCurrentTrack();
+            }
+        }
+
+        if($data == null) {
+            return view('dataDisplay')->with(['type' => '204-unavailable']);
+        }
+
+        return $this->getRecommendationsFromTrack($data['item']);
+    }
+
+    // Gets recommended tracks from a specified track
+    function getRecommendationsFromTrack($trackInfo) {
+        if(!Session::has('accessToken')) {
+            return redirect('/');
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.session('accessToken'),
+        ])->get('https://api.spotify.com/v1/recommendations?limit=20&seed_tracks='.$trackInfo['id']);
+        
+        $data = $response->json();
+
+        if(isset($data['error']['status'])) {
+            if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
+                $this->refreshDataAccess();
+                return $this->getRecommendationsFromTrack();
+            }
+        }
+        
+        return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'currentTrack', 'currentTrackInfo' => $trackInfo]);
     }
 }
