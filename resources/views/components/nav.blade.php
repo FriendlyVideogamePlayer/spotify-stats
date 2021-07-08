@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark mb-1">
+<nav class="navbar navbar-expand-md navbar-dark navbar-underline mb-1">
   <a class="plainItem navbar-brand" >Spotify stats</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarRight">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <p class="plainItem nav-link"><?php echo session('username'); ?></p>
+      <p class="plainItem navbarUserName nav-link"><?php echo session('username'); ?></p>
     </li>
     <li class="nav-item">
       <img class="userImage" src="{{ session('userImage') ?? asset('images/noimage.png') }}" alt="userImage">

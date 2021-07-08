@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <div class="card mb-4 box-shadow card-home">
-                        <img class="card-img-top cardPurple" alt="example image of the top tracks page" style="height: auto; width: 100%; display: block;" src="{{asset('images/toptracks.png')}}">
+                        <img class="card-img-top cardPurple" alt="example image of the top tracks page" style="height: auto; width: 100%; display: block;" src="{{asset('images/toptracks.jpg')}}">
                         <div class="card-body">
                             <p class="card-text lead text-card">View your top 50 tracks/artists on Spotify from the last 4 weeks, 6 months or all time!</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -29,9 +29,9 @@
 
                 <div class="col-md-4 col-sm-6">
                     <div class="card mb-4 box-shadow card-home">
-                        <img class="card-img-top cardPurple" alt="example image of the recommendations page" style="height: auto; width: 100%; display: block;" src="{{asset('images/recommendations.png')}}" >
+                        <img class="card-img-top cardPurple" alt="example image of the recommendations page" style="height: auto; width: 100%; display: block;" src="{{asset('images/current-recommendations.jpg')}}" >
                         <div class="card-body">
-                            <p class="card-text lead text-card">View 50 recommended tracks based upon your top tracks and artists.</p>
+                            <p class="card-text lead text-card">View recommended tracks based upon your top tracks and artists or based upon the song you are listening to right now!.</p>
                             <div class="d-flex justify-content-between align-items-center">
                             </div>
                         </div>
