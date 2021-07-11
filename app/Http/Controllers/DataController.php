@@ -41,16 +41,13 @@ class DataController extends Controller
         
         $data = $response->json();
 
-        // $data2 = session()->all();  checking session keys
-        // var_dump($data2);
-
         if(isset($data['error']['status'])) {
             if($data['error']['status'] == '401' || $data['error']['status'] == '400') {
                 $this->refreshDataAccess();
                 return $this->getTop($type);
             }
         }
-        // If on artists then get artist seeds for reccomended tracks
+        // Use the top tracks or artists as seeds for recommended tracks
         $recommendedSeeds = [];
         $i = 0;
 
@@ -70,7 +67,7 @@ class DataController extends Controller
         return view('dataDisplay')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
     }
 
-    // Gets a user reccommended tracks based upon their top artists
+    // Gets a users reccommended tracks based upon their top artists
     function getRecommendations() {
         if(!Session::has('accessToken')) {
             return redirect('/');
@@ -92,7 +89,7 @@ class DataController extends Controller
         return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
     }
 
-    // Gets a user's display name and image'
+    // Gets a user's display name and image to display in the navbar
     function getDisplayInfo() {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
@@ -145,7 +142,7 @@ class DataController extends Controller
             array_push($playlistData, $item['name'], $item['id']);
             Session::push('playlistIds', $playlistData);
         }
-
+        // recursively call ourself to grab all of the available playlists to a cap
         if($offset < $playlistCount && $offset < 100) {
             return $this->getPlaylistTracks($offset);
         }
@@ -158,14 +155,13 @@ class DataController extends Controller
         if(!Session::has('accessToken')) {
             return redirect('/');
         }
-        
+
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
-        
+
+        // clear the values if this is a clean call of the function but it was used before
         if($offsetVal == 0 && Session('artistNames') !== null ) {
-            Session::forget('artistNames');
             Session::forget('trackIds');
-            session(['artistNames' => []]);
             session(['trackIds' => []]);
         }
 
@@ -185,24 +181,18 @@ class DataController extends Controller
         $trackCount = $data['total'];
         $offset += 100;
 
+        // Take track name and id and pair them in an array
         foreach($data['items'] as $item) {
-            $trackName = $item['track']['name'];
-            Session::push('artistNames', $trackName);
-
-            foreach($item['track']['artists'] as $subItem) {
-                Session::push('artistNames', $subItem['name']);
-            }
-
             $trackData = [];
             array_push($trackData, $item['track']['name']);
             array_push($trackData, $item['track']['id']);
             Session::push('trackIds', $trackData);
         }
-        
+        // recursively call ourself to grab all of the available tracks to a cap
         if($offset < $trackCount && $offset < 500) {
             return $this->getPlaylistTracks($playlistId, $offset);
         }
-
+        // Use playlist selected in the html select
         $selectedPlaylist = array_search($playlistId, array_column(session('playlistIds'), 1));
         session(['selectedPlaylist' => session('playlistIds.'.$selectedPlaylist.'.0')]);
 
@@ -214,13 +204,13 @@ class DataController extends Controller
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
 
+        // seperate all the track ids into one comma seperated array
         $slicedTrackIds = [];
         $i = $offset;
         while($i < $offset+100 && $i < $trackCount) {
             array_push($slicedTrackIds, session('trackIds')[$i][1]);
             $i++;
         }
-
         $trackIdList = implode(',', $slicedTrackIds);
 
         $response = Http::withHeaders([
@@ -235,7 +225,7 @@ class DataController extends Controller
                 return $this->getTrackFeatures($offset, $trackCount);
             }
         }
-
+        // clear the values if this is a clean call of the function but it was used before
         if($offset == 0 && session('playlistStats') !== null) {
             Session::forget('playlistStats');
             session(['playlistStats' => []]);
@@ -244,6 +234,7 @@ class DataController extends Controller
             session(['playlistStats' => []]);
         }
 
+        // calculate and store each track feature in the playliststats array
         foreach($data['audio_features'] as $item) {
             $duration_ms  = $item['duration_ms'];
 			$duration_m = floor($duration_ms / 60000);
@@ -368,7 +359,9 @@ class DataController extends Controller
                 return $this->getRecommendationsFromTrack();
             }
         }
-        
+    
         return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'currentTrack', 'currentTrackInfo' => $trackInfo]);
     }
+
+
 }

@@ -480,3 +480,9 @@ rect {
 .card-home:focus .itemName {
     color: rgba(255, 255, 255, 0.999);
 }
+
+@media (max-width: 810px) {
+    .navbar-adjust-size {
+        font-size: 0.9rem !important;
+    }
+}
