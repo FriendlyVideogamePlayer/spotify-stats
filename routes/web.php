@@ -24,13 +24,13 @@ Route::get('/privacy', function () {
 
 Route::get('/callback', 'AuthController@callback');
 
-Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)');
+Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)')->name('top');
 
-Route::get('/recommendations', 'DataController@getRecommendations');
+Route::get('/recommendations', 'DataController@getRecommendations')->name('recommendations');
 
-Route::get('/playlists', 'DataController@getPlaylists');
+Route::get('/playlists', 'DataController@getPlaylists')->name('playlists');
 
 Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks');
 
-Route::get('/morelikethis', 'DataController@getCurrentTrack');
+Route::get('/morelikethis', 'DataController@getCurrentTrack')->name('morelikethis');
 

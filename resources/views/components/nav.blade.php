@@ -6,19 +6,19 @@
   <div class="collapse navbar-collapse navbar-adjust-size" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('toptracks') ? 'selectedNav' : '' }}" href="http://134.122.70.206/toptracks">Top Tracks</a>
+        <a class="nav-link {{ Request::is('toptracks') ? 'selectedNav' : '' }}" href="{{ route('top', ['type' => 'tracks']) }}">Top Tracks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('topartists') ? 'selectedNav' : '' }}" href="http://134.122.70.206/topartists">Top Artists</a>
+        <a class="nav-link {{ Request::is('topartists') ? 'selectedNav' : '' }}" href="{{ route('top', ['type' => 'artists']) }}">Top Artists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="http://134.122.70.206/recommendations">Recommendations</a>
+        <a class="nav-link {{ Request::is('recommendations') ? 'selectedNav' : '' }}" href="{{ route('recommendations') }}">Recommendations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('playlists') ? 'selectedNav' : '' }}" href="http://134.122.70.206/playlists">Playlists</a>
+        <a class="nav-link {{ Request::is('playlists') ? 'selectedNav' : '' }}" href="{{ route('playlists') }}">Playlists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('morelikethis') ? 'selectedNav' : '' }}" href="http://134.122.70.206/morelikethis">More like this</a>
+        <a class="nav-link {{ Request::is('morelikethis') ? 'selectedNav' : '' }}" href="{{ route('morelikethis') }}">More like this</a>
       </li>
     </ul>
   </div>
