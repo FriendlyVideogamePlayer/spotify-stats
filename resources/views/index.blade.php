@@ -8,7 +8,7 @@
         </div>
         <div class="index">
             <p class="lead text-card pb-3">This site will allow you to see your top 50 tracks and artists on Spotify, as well as see recommendations for songs you might like.</p>
-            <a href="http://134.122.70.206/authorize" class="btn btn-primary my-3">Connect your Spotify!</a>
+            <a href="{{ route('login') }}" class="btn btn-primary my-3">Connect your Spotify!</a>
             </p>
         </div>
     </div>

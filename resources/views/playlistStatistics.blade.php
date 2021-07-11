@@ -14,6 +14,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Track with highest {{$value['fType']}}</h5>
                             <p class="card-text">{{$value['feature']}}</p>
+                            <p class="card-text">Highest value: {{$value['max'][0]}}</p>
                             <a href="{{$value['link']}}" class="btn btn-primary">Listen on Spotify!</a>
                         </div>
                     </div>
