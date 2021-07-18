@@ -20,7 +20,7 @@
         Alternatively insert a link below to a playlist instead.
         </div>
         
-        <input class="form-control my-4" type="text" id="playlistURL" placeholder="e.g https://open.spotify.com/playlist/37i9dQZF1DXa8NOEUWPn9W" aria-labelledby="inputDesc"> 
+        <input class="form-control my-4" type="text" id="playlistURL" placeholder="e.g https://open.spotify.com/playlist/37i9dQZF1DXa8NOEUWPn9W" aria-labelledby="inputDescription"> 
         <div class="index"> <button onclick="playlistSelect();" class="btn btn-primary">Choose!</button></div>
     </div>
 

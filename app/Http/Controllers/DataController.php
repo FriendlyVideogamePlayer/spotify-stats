@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class DataController extends Controller
 {
-    // This refreshes the accessToken that is required to run any other API call
+    // Refreshes the accessToken that is required to run any other API call and overwrites the current value in the session
     function refreshDataAccess() {
         $authorization = base64_encode("".env('SPOTIFY_CLIENT_ID').":".env('SPOTIFY_CLIENT_SECRET'));
 
@@ -24,7 +24,11 @@ class DataController extends Controller
         session(['accessToken' => $responseJSON['access_token']]);
     }
 
-    // Gets a users top 50 tracks/artists depending on which route was used
+    /**
+     * Gets a users top 50 tracks/artists depending on which route was visited
+     * Also checks if a time query string exists and uses it in the api call if it does
+     * Returns a view that displays the top 50 artists/tracks in a specific time period
+     */ 
     function getTop($type) {
         if(!Session::has('accessToken')) {
             return redirect('/');
@@ -47,7 +51,7 @@ class DataController extends Controller
                 return $this->getTop($type);
             }
         }
-        // Use the top tracks or artists as seeds for recommended tracks
+        // Use the top tracks or artists as seeds for the recommended tracks function that might be accessed later
         $recommendedSeeds = [];
         $i = 0;
 
@@ -67,7 +71,7 @@ class DataController extends Controller
         return view('dataDisplay')->with(['items' => $data['items'], 'type' => $type, 'range' => $range]);
     }
 
-    // Gets a users reccommended tracks based upon their top artists
+    // Gets a users recommended tracks based upon their top artists using the seeds from the above function and returns the recommendations view to display them
     function getRecommendations() {
         if(!Session::has('accessToken')) {
             return redirect('/');
@@ -89,7 +93,7 @@ class DataController extends Controller
         return view('dataDisplay')->with(['items' => $data['tracks'], 'type' => 'recommendations']);
     }
 
-    // Gets a user's display name and image to display in the navbar
+    // Gets a user's spotify display name and image to display in the navbar
     function getDisplayInfo() {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
@@ -106,7 +110,7 @@ class DataController extends Controller
         }
     }
 
-    // Gets a list of all playlists a user follows or owns
+    // Gets a list of all playlists a user follows or owns, returns the playlist selector view with all the playlists inserted into a select
     function getPlaylists($offset = null) {
         if(!Session::has('accessToken')) {
             return redirect('/');
@@ -142,7 +146,7 @@ class DataController extends Controller
             array_push($playlistData, $item['name'], $item['id']);
             Session::push('playlistIds', $playlistData);
         }
-        // recursively call ourself to grab all of the available playlists to a cap
+        // recursively call ourself to grab all of the available playlists to a cap of 100
         if($offset < $playlistCount && $offset < 100) {
             return $this->getPlaylistTracks($offset);
         }
@@ -159,7 +163,7 @@ class DataController extends Controller
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
 
-        // clear the values if this is a clean call of the function but it was used before
+        // clear the values if this is a clean call of the function but it was used before so as not to have multiple playlists data used when we only want one
         if($offsetVal == 0 && Session('artistNames') !== null ) {
             Session::forget('trackIds');
             session(['trackIds' => []]);
@@ -192,14 +196,14 @@ class DataController extends Controller
         if($offset < $trackCount && $offset < 500) {
             return $this->getPlaylistTracks($playlistId, $offset);
         }
-        // Use playlist selected in the html select
+        // Use the playlist selected in the html select
         $selectedPlaylist = array_search($playlistId, array_column(session('playlistIds'), 1));
         session(['selectedPlaylist' => session('playlistIds.'.$selectedPlaylist.'.0')]);
 
         return $this->getTrackFeatures(0, $trackCount);
     }
 
-    // Gets the Spotify "features" of a track such as danceability
+    // Gets the Spotify "features" of a track such as danceability for all tracks within a playlist
     function getTrackFeatures($offset = null, $trackCount) {
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
@@ -255,6 +259,7 @@ class DataController extends Controller
             return $this->getTrackFeatures($offset, $trackCount);
         }
 
+        // Set vars for, and then obtain, max values for each feature and the track id
         $maxDanceability = $maxEnergy = $maxLoudness = $maxTempo = $maxValence = $maxDuration = null;
         $maxDanceabilityKey = $maxEnergyKey = $maxLoudnessKey = $maxTempoKey = $maxValenceKey = $maxDurationKey = null;
 

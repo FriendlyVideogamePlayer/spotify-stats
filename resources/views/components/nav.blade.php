@@ -25,7 +25,7 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarRight">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <p class="plainItem navbarUserName nav-link"><?php echo session('username'); ?></p>
+      <a class="plainItem nav-link"><?php echo session('username'); ?></a>
     </li>
     <li class="nav-item">
       <img class="userImage" src="{{ session('userImage') ?? asset('images/noimage.png') }}" alt="userImage">
