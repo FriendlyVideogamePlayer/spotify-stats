@@ -30,7 +30,7 @@ Route::get('/recommendations', 'DataController@getRecommendations')->name('recom
 
 Route::get('/playlists', 'DataController@getPlaylists')->name('playlists');
 
-Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks');
+Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks')->name('playlistSelector');
 
 Route::get('/morelikethis', 'DataController@getCurrentTrack')->name('morelikethis');
 
