@@ -41,9 +41,6 @@ class DataController extends Controller
      */
     function getTop($type)
     {
-        if(!Session::has('accessToken')) {
-            return redirect('/');
-        }
         if(!Session::has('username')) {
             $this->getDisplayInfo();
         }
@@ -90,10 +87,6 @@ class DataController extends Controller
      */
     function getRecommendations()
     {
-        if(!Session::has('accessToken')) {
-            return redirect('/');
-        }
-
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
         ])->get('https://api.spotify.com/v1/recommendations?limit=50&seed_artists='.session('recommendedSeeds'));
@@ -140,10 +133,6 @@ class DataController extends Controller
      */
     function getPlaylists($offset = null)
     {
-        if(!Session::has('accessToken')) {
-            return redirect('/');
-        }
-
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
 
@@ -191,10 +180,6 @@ class DataController extends Controller
      */
     function getPlaylistTracks($playlistId, $offset = null)
     {
-        if(!Session::has('accessToken')) {
-            return redirect('/');
-        }
-
         $offsetVal = ($offset !== null) ? $offset : 0;
         $offset = $offsetVal;
 
@@ -285,15 +270,16 @@ class DataController extends Controller
             $duration_ms  = $item['duration_ms'];
 			$duration_m = floor($duration_ms / 60000);
 			$duration_s = floor(($duration_ms / 1000) % 60);
-			$formating = '%02u:%02u';
-            $duration = sprintf($formating, $duration_m, $duration_s);
+			$formatting = '%02u:%02u';
+            $duration = sprintf($formatting, $duration_m, $duration_s);
 
-            Session::push('playlistStats.'.$item['id'].'.danceability', $item['danceability']);
-            Session::push('playlistStats.'.$item['id'].'.energy', $item['energy']);
-            Session::push('playlistStats.'.$item['id'].'.loudness', $item['loudness']);
-            Session::push('playlistStats.'.$item['id'].'.tempo', $item['tempo']);
-            Session::push('playlistStats.'.$item['id'].'.valence', $item['valence']);
+            $wantedFeatures = ['danceability', 'energy', 'loudness', 'tempo', 'valence'];
+
+            foreach($wantedFeatures as $feature) {
+                Session::push('playlistStats.'.$item['id'].'.'.$feature, $item[$feature]);
+            }
             Session::push('playlistStats.'.$item['id'].'.duration', $duration);
+
         }
 
         $offset += 100;
@@ -304,7 +290,6 @@ class DataController extends Controller
         // Set vars for, and then obtain, max values for each feature and the track id
         $maxDanceability = $maxEnergy = $maxLoudness = $maxTempo = $maxValence = $maxDuration = null;
         $maxDanceabilityKey = $maxEnergyKey = $maxLoudnessKey = $maxTempoKey = $maxValenceKey = $maxDurationKey = null;
-
         $danceabilityVals = $tempoVals = $valenceVals = [];
 
 		foreach(session('playlistStats') as $key => $value) {
@@ -367,10 +352,6 @@ class DataController extends Controller
      */
     function getCurrentTrack()
     {
-        if(!Session::has('accessToken')) {
-            return redirect('/');
-        }
-
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),
         ])->get('https://api.spotify.com/v1/me/player/currently-playing');
@@ -398,9 +379,6 @@ class DataController extends Controller
      * @return RedirectResponse|View
      */
     function getRecommendationsFromTrack($trackInfo) {
-        if(!Session::has('accessToken')) {
-            return redirect('/');
-        }
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.session('accessToken'),

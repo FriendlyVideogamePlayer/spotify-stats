@@ -24,13 +24,16 @@ Route::get('/privacy', function () {
 
 Route::get('/callback', 'AuthController@callback');
 
-Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)')->name('top');
+Route::middleware([CheckAge::class])->group(function () {
+    Route::get('/top{type}', 'DataController@getTop')->where('type', '(tracks|artists)')->name('top');
 
-Route::get('/recommendations', 'DataController@getRecommendations')->name('recommendations');
+    Route::get('/recommendations', 'DataController@getRecommendations')->name('recommendations');
 
-Route::get('/playlists', 'DataController@getPlaylists')->name('playlists');
+    Route::get('/playlists', 'DataController@getPlaylists')->name('playlists');
 
-Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks')->name('playlistSelector');
+    Route::get('/playlist/{playlistId}', 'DataController@getPlaylistTracks')->name('playlistSelector');
 
-Route::get('/morelikethis', 'DataController@getCurrentTrack')->name('morelikethis');
+    Route::get('/morelikethis', 'DataController@getCurrentTrack')->name('morelikethis');
+});
+
 
